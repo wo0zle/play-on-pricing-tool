@@ -1,0 +1,13 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#1A365D"/>
+  
+  <!-- Inner Circle (Gold Ring) -->
+  <circle cx="100" cy="100" r="75" stroke="#D69E2E" stroke-width="6" fill="none"/>
+  
+  <!-- Play Button Triangle -->
+  <path d="M80 60L140 100L80 140V60Z" fill="#D69E2E"/>
+  
+  <!-- Subtle highlight -->
+  <circle cx="100" cy="100" r="75" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/>
+</svg>

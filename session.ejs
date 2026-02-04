@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Play On Session Tracker - Track your sourcing trip finds">
+  <meta name="theme-color" content="#1A365D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <title><%= title %></title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="/" class="logo">
+            <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="18" stroke="#D69E2E" stroke-width="3" fill="none"/>
+              <path d="M16 12L28 20L16 28V12Z" fill="#D69E2E"/>
+            </svg>
+            <div>
+              <span class="logo-text"><span class="play">PLAY</span> <span class="on">ON</span></span>
+              <div class="tagline"><%= tagline %></div>
+            </div>
+          </a>
+          <nav class="nav">
+            <a href="/" class="nav-link">Price</a>
+            <a href="/calculator" class="nav-link">ROI</a>
+            <a href="/session" class="nav-link active">Session</a>
+            <a href="/platforms" class="nav-link">Codes</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+    
+    <main class="main-content">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+              Sourcing Session
+            </h1>
+            <button class="btn btn-secondary" onclick="clearSession()">Clear</button>
+          </div>
+          
+          <div id="sessionStats" class="session-stats">
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Items</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">$0.00</div>
+              <div class="stat-label">Spent</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">$0.00</div>
+              <div class="stat-label">Value</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value profit">$0.00</div>
+              <div class="stat-label">Est. Profit</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Add Item</h2>
+          </div>
+          
+          <form id="addItemForm" class="calculator-form">
+            <div class="form-group">
+              <label class="form-label" for="itemTitle">Title</label>
+              <input type="text" id="itemTitle" class="form-input" placeholder="Game title..." required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="itemPlatform">Platform</label>
+                <select id="itemPlatform" class="form-input">
+                  <% platforms.forEach(p => { %>
+                  <option value="<%= p.code %>"><%= p.code %> - <%= p.name %></option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="itemCondition">Condition</label>
+                <select id="itemCondition" class="form-input">
+                  <% conditions.forEach(c => { %>
+                  <option value="<%= c.code %>"><%= c.name %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="itemMarketValue">Market Value ($)</label>
+                <input type="number" id="itemMarketValue" class="form-input" placeholder="0.00" step="0.01" min="0" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="itemCostPaid">Cost Paid ($)</label>
+                <input type="number" id="itemCostPaid" class="form-input" placeholder="0.00" step="0.01" min="0" required>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-gold">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Add to Session
+            </button>
+          </form>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Session Items</h2>
+          </div>
+          <div id="sessionItems" class="session-items">
+            <div class="empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+              <p>No items in this session yet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer class="footer">
+      <div class="container">
+        <span class="footer-brand">▶ PLAY ON</span> &bull; Fair Prices. Sincere Service. Quality Finds.
+      </div>
+    </footer>
+  </div>
+  
+  <script src="/js/app.js"></script>
+  <script>
+    document.getElementById('addItemForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const item = {
+        title: document.getElementById('itemTitle').value,
+        platform: document.getElementById('itemPlatform').value,
+        condition: document.getElementById('itemCondition').value,
+        marketValue: parseFloat(document.getElementById('itemMarketValue').value) || 0,
+        costPaid: parseFloat(document.getElementById('itemCostPaid').value) || 0
+      };
+      addToSession(item);
+      this.reset();
+      document.getElementById('itemTitle').focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - <%= brandName %></title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="/" class="logo">
+            <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="18" stroke="#D69E2E" stroke-width="3" fill="none"/>
+              <path d="M16 12L28 20L16 28V12Z" fill="#D69E2E"/>
+            </svg>
+            <div>
+              <span class="logo-text"><span class="play">PLAY</span> <span class="on">ON</span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+    
+    <main class="main-content">
+      <div class="container">
+        <div class="card" style="text-align: center; padding: 3rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 64px; height: 64px; color: var(--retro-gold); margin-bottom: 1rem;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <h1 style="color: var(--deep-navy); margin-bottom: 0.5rem;"><%= title %></h1>
+          <p style="color: var(--cool-gray); margin-bottom: 1.5rem;"><%= message %></p>
+          <a href="/" class="btn btn-primary">Back to Home</a>
+        </div>
+      </div>
+    </main>
+    
+    <footer class="footer">
+      <div class="container">
+        <span class="footer-brand">▶ PLAY ON</span> &bull; Fair Prices. Sincere Service. Quality Finds.
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
